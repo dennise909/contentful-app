@@ -3,7 +3,7 @@ import { graphql } from "gatsby";
 import Layout from "../components/layout.js";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import {container} from '../styles/movie-template.module.css'
+import { container } from "../styles/movie-template.module.css";
 
 export const query = graphql`
   query($slug: String) {
@@ -48,10 +48,9 @@ const MovieTemplate = ({ data }) => {
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen='true'
+                allowfullscreen="true"
               ></iframe>
-            )}
-            {" "}
+            )}{" "}
             <GatsbyImage image={getImage(movie.movieImage)} />
           </div>
           <h3>{movie.movieTitle}</h3>
