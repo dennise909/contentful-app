@@ -1,16 +1,10 @@
 import * as React from 'react';
 import { graphql,useStaticQuery,Link } from 'gatsby';
-import {GatsbyImage, getImage} from 'gatsby-plugin-image'
-import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
 import { AssetCard } from '@contentful/f36-components';
+import { Col } from 'react-bootstrap';
 
-export default function CardTemplate({
-  children,
-  title = false,
-  description = false,
-  image = false,
-  path = false,
-}) {
+
+export default function CardTemplate() {
 const data = useStaticQuery(graphql`
 {
   movies: allContentfulMoviePost {
@@ -31,23 +25,20 @@ const data = useStaticQuery(graphql`
 
 //const movieImage = getImage(movieData)
 const movieSrc = data.movies.nodes
-console.log(movieSrc)
-
-
 
 return(
   <>
   {data.movies.nodes.map((movie) =>{  
-    //console.log(movie.movieImage?.file.url)
+    //return null when the data is empty 
     if (movie.movieImage === null){
       return null
     }
     return (
       <Link to={`/${movie.slug}`}> 
-      <AssetCard
+      <AssetCard //creates a card by using a Forma36 component
       type="image"
       title={movie.movieTitle}
-      src={movie.movieImage.file.url} /*Here I would like to inject the image fro the GraphQL*/
+      src={movie.movieImage.file.url} /*Here I would like to inject the image from the GraphQL*/
     />
     </Link>
 )}
