@@ -1,7 +1,9 @@
 import * as React from 'react';
-import Layout from '../components/layout.js'
 import { graphql } from 'gatsby';
+import Layout from '../components/layout.js';
 import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
+import {GatsbyImage, getImage} from 'gatsby-plugin-image';
+
 
 export const query = graphql`
   query ($slug: String){
@@ -12,6 +14,9 @@ export const query = graphql`
             raw
         }
         movieTrailer
+        movieImage {
+            gatsbyImageData
+          }
         seo {
             description {
             description
@@ -29,7 +34,9 @@ export const query = graphql`
     }
 `;
 
-const MovieTemplate = ({data}) => (
+const MovieTemplate = ({data}) => {
+
+return (
     <Layout>
 
          {data.movies.nodes.map(movie => (
@@ -40,10 +47,15 @@ const MovieTemplate = ({data}) => (
               {movie.movieTrailer&&<iframe width="500" height="400" src={movie.movieTrailer} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>}
          `  </div>
             {movie.movieDescription && documentToReactComponents(JSON.parse(movie.movieDescription.raw))}
+            <GatsbyImage
+            image= {(getImage(movie.movieImage))}
+
+            
+            />
           </div>
         ))}
 
     </Layout>
-)
+)}
 
 export default MovieTemplate
