@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { container } from "../styles/movie-template.module.css";
 
 export const query = graphql`
-  query($slug: String) {
+  query ($slug: String) {
     movies: allContentfulMoviePost(filter: { slug: { eq: $slug } }) {
       nodes {
         movieTitle

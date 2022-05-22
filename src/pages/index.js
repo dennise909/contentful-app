@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link, graphql } from "gatsby";
 import Layout from "../components/layout.js";
 import CardTemplate from "../components/card-template.js";
-import { Container,Row,Col } from 'react-bootstrap';
+import { Grid } from "@contentful/f36-components";
 
 export const query = graphql`
   {
@@ -18,17 +18,23 @@ export const query = graphql`
   }
 `;
 
-export default () =>  (
-    <Layout>
-      <h1>Hello Movie Lovers</h1>
-      <Link to="/about">About this site</Link>
-      <h2>Check out my all time favorite movies!</h2>
-      <Container fluid>
-        <Row>
-        <Col lg={4}><CardTemplate/></Col>
-        </Row>
-      </Container>
-    </Layout>
-  );
+const IndexPage = () => (
+  <Layout>
+    <h1>Hello Movie Lovers</h1>
+    <Link to="/about">About this site</Link>
+    <h2>Check out my all time favorite movies!</h2>
 
+    <Grid
+      style={{ width: "100%" }}
+      columns="1fr 1fr 1fr"
+      rows="1fr"
+      rowGap="spacingM"
+      columnGap="spacingM"
+    >
+      <CardTemplate />
+    </Grid>
+  </Layout>
+);
+
+export default IndexPage;
 //npm run develop will add a markup
